@@ -52,6 +52,17 @@ Application of Array:
 - It is used in lookup tables by computer.
 - It is used for different sorting algorithms such as bubble sort insertion sort, merge sort, and quick sort.
 
+## Array in Python
+
+### Available methods
+- append()
+- insert()
+- pop()
+- remove()
+- index()
+- reverse()
+
+
 ```python
 # importing "array" for array operations
 import array
