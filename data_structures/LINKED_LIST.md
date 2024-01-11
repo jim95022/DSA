@@ -1,7 +1,4 @@
-# Linked List
-
 <!-- TOC -->
-* [Linked List](#linked-list)
   * [Types of linked lists](#types-of-linked-lists)
     * [Single-linked list](#single-linked-list)
     * [Double linked list](#double-linked-list)
@@ -151,7 +148,157 @@ lists.
 ## Common Problems
 
 ### Finding the middle element in a Linked list
+
+```text
+Given a singly linked list of N nodes.
+The task is to find the middle of the linked list. For example, if the linked list is
+1 -> 2 -> 3 -> 4 -> 5, then the middle node of the list is 3.
+If there are two middle nodes(in case, when N is even), print the second middle element.
+For example, if the linked list given is 1->2->3->4->5->6, then the middle node of the list is 4.
+
+Input:
+LinkedList: 1 -> 2 -> 3 -> 4 -> 5
+Output: 3 
+Explanation: 
+Middle of linked list is 3.
+
+Input:
+LinkedList: 2 -> 4 -> 6 -> 7 -> 5 -> 1
+Output: 7 
+Explanation: 
+Middle of linked list is 7.
+
+Your Task:
+The task is to complete the function getMiddle() which takes a head reference as the only argument and should return the 
+data at the middle node of the linked list.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= N <= 5000
+```
+
+```python
+class Solution:
+    #  Should return data of middle node. If linked list is empty, then  -1
+    def findMid(self, head):
+        
+        if not head:
+            return -1
+        
+        need_to_move_middle_node = True
+        current_node = head
+        middle_node = head
+        
+        while True:
+            
+            if current_node.next:
+                current_node = current_node.next
+            else:
+                return middle_node.data
+            
+            if need_to_move_middle_node:
+                middle_node = middle_node.next
+            
+            need_to_move_middle_node = not need_to_move_middle_node
+```
+
+```python
+class Solution:
+    def findMid(self, head):
+        
+        if not head:
+            return -1
+    
+        middle_node = head
+        current_node = head
+        
+        while current_node and current_node.next:
+            middle_node = middle_node.next
+            # this pointer moves 1 nodes ahead everytime loop is run
+        
+            current_node = current_node.next.next
+            # this pointer moves 2 nodes ahead everytime loop is run
+        
+        return middle_node.data
+        # since slow was moving with half speed, it is there at halfway point
+```
+
 ### Reverse a Linked list
+
+```text
+Given a linked list of N nodes. The task is to reverse this list.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->3->4->5->6
+Output: 6 5 4 3 2 1
+Explanation: After reversing the list, 
+elements are 6->5->4->3->2->1.
+Example 2:
+
+Input:
+LinkedList: 2->7->8->9->10
+Output: 10 9 8 7 2
+Explanation: After reversing the list,
+elements are 10->9->8->7->2.
+Your Task:
+The task is to complete the function reverseList() with head reference as the only argument and should return new head after reversing the list.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= N <= 104
+```
+
+```python
+class Solution:
+    #Function to reverse a linked list.
+    def reverseList(self, head):
+
+        new_head = None
+
+        while head:
+            helper_node = head.next  # 2 3 4 ...   # 3 4 5 ...
+            head.next = new_head     # None        # 1 None ...
+            new_head = head          # 1 None ...  # 2 1 None ...
+            head = helper_node       # 2 3 4 ...   # 3 4 5 ...
+
+        return new_head
+```
+
+```python
+class Solution:
+    #Function to reverse a linked list.
+    def reverseList(self, head):
+        if head is None:
+            return None
+        
+        #taking three pointers to store the current, previous and next nodes.
+        prev = None
+        current = head
+        next = current.next
+        
+        
+        while current is not None:
+            #taking the next node as next.
+            next = current.next 
+            
+            #storing the previous node in link part of current node.
+            current.next = prev 
+            
+            #updating prev from previous node to current node.
+            prev = current
+            
+            #updating current node to next node.
+            current = next           
+        
+        return prev
+```
+
 ### Rotate a Linked List
 ### Reverse a Linked List in groups of given size
 ### Intersection point in Y shaped Linked lists
