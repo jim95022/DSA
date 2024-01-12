@@ -402,6 +402,86 @@ class Solution:
 ```
 
 ### Reverse a Linked List in groups of given size
+
+```text
+Given a linked list of size N. The task is to reverse every k nodes (where k is an input to the function) in the linked 
+list. If the number of nodes is not a multiple of k then left-out nodes, in the end, should be considered as a group and
+ must be reversed (See Example 2 for clarification).
+
+Example 1:
+
+Input:
+LinkedList: 1->2->2->4->5->6->7->8
+K = 4
+Output: 4 2 2 1 8 7 6 5 
+Explanation: 
+The first 4 elements 1,2,2,4 are reversed first 
+and then the next 4 elements 5,6,7,8. Hence, the 
+resultant linked list is 4->2->2->1->8->7->6->5.
+Example 2:
+
+Input:
+LinkedList: 1->2->3->4->5
+K = 3
+Output: 3 2 1 5 4 
+Explanation: 
+The first 3 elements are 1,2,3 are reversed 
+first and then elements 4,5 are reversed.Hence, 
+the resultant linked list is 3->2->1->5->4.
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function reverse() which should reverse the
+ linked list in group of size k and return the head of the modified linked list.
+
+Expected Time Complexity : O(N)
+Expected Auxilliary Space : O(1)
+
+Constraints:
+1 <= N <= 105
+1 <= k <= N
+```
+
+```python
+class Solution:
+    def reverse(self,head, k):
+        current_node = head
+        new_head = None
+        count = 0
+
+        while current_node and count != k:
+            temp_node = current_node.next
+            current_node.next = new_head
+            new_head = current_node
+            current_node = temp_node
+            count += 1
+
+        if temp_node:
+            head.next = self.reverse(temp_node, k)
+
+        return new_head
+```
+
+```python
+class Solution:
+    def reverse(self, head, k):
+        current = head
+        next = None
+        prev = None
+        count = 0
+        
+        while (current is not None and count < k):
+            # reversing k elements
+            next = current.next              # storing value of next node
+            current.next = prev              # reversing link
+            prev = current                   # updating prev
+            current = next                   # updating current
+            count += 1
+        
+        if next is not None:    # checking if there are more nodes ahead
+            head.next = self.reverse(next, k)     # reversing those recursively
+        
+        return prev
+```
+
 ### Intersection point in Y shaped Linked lists
 ### Detect Loop in Linked list
 ### Remove loop in Linked List
