@@ -300,6 +300,107 @@ class Solution:
 ```
 
 ### Rotate a Linked List
+
+```text
+Given a singly linked list of size N. The task is to left-shift the linked list by k nodes, where k is a given positive 
+integer smaller than or equal to length of the linked list.
+
+Example 1:
+
+Input:
+N = 5
+value[] = {2, 4, 7, 8, 9}
+k = 3
+Output: 8 9 2 4 7
+Explanation:
+Rotate 1: 4 -> 7 -> 8 -> 9 -> 2
+Rotate 2: 7 -> 8 -> 9 -> 2 -> 4
+Rotate 3: 8 -> 9 -> 2 -> 4 -> 7
+Example 2:
+
+Input:
+N = 8
+value[] = {1, 2, 3, 4, 5, 6, 7, 8}
+k = 4
+Output: 5 6 7 8 1 2 3 4
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function rotate() which takes a head 
+reference as the first argument and k as the second argument, and returns the head of the rotated linked list.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= N <= 103
+1 <= k <= N
+```
+
+```python
+    def rotate(self, head, k):
+
+        current_node = None
+        left_part = head
+
+        for _ in range(k):
+            if left_part.next:
+                current_node = left_part
+                left_part = left_part.next
+            else:
+                return head
+
+        current_node.next = None
+
+        new_head = left_part
+
+        while left_part.next:
+            left_part = left_part.next
+
+        left_part.next = head
+
+        return new_head
+```
+
+```python
+class Solution:
+    
+    #Function to rotate a linked list.
+    def rotate(self, head, k):
+        if k == 0:
+            return head
+        
+        walk = head     # 1 2 3 ...
+        prev = None     # None
+        
+        
+        #this loop runs k times and walk pointer moves k nodes ahead 
+        #and reaches new head node.
+        for _ in range(k):
+            prev = walk          # 1 2 3 ... # 2 3 4 ... # 3 4 5 ...
+            walk = walk.next     # 2 3 4 ... # 3 4 5 ... # 4 5 6
+            
+            #considering cases where k>=n so nothing needs to be done.
+            if walk is None:
+                return head
+        
+        #we store the walk pointer which gives the first node in newHead.
+        newHead = walk          # 4 5 6
+        
+        #since prev points to the node placed before new head it is new tail
+        #or the last node of new list so we store null in it's link part.
+        prev.next = None        # 3 None
+        
+        #we keep moving the walk pointer till we reach the last node of list.
+        while walk.next is not None:
+            walk = walk.next   # 4 5 6  # 5 6  # 6
+        
+        #connecting last node of old list to old head.
+        walk.next = head       # 6 1 2 ...
+        
+        #returning the new list.
+        return newHead         # 4 5 6
+```
+
 ### Reverse a Linked List in groups of given size
 ### Intersection point in Y shaped Linked lists
 ### Detect Loop in Linked list
