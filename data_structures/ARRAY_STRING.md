@@ -1,4 +1,4 @@
-# Array and String
+# Array
 
 An array is a collection of items stored at contiguous memory locations. The idea is to store multiple items of the 
 same type together. This makes it easier to calculate the position of each element by simply adding an offset to a 
@@ -85,5 +85,6 @@ for i in range (len(arr)):
     print(arr[i], end=" ")
 ```
 
+# String
 > Strings are defined as an array of characters. The difference between a character array and a string is the string is 
 > terminated with a special character ‘\0’.
