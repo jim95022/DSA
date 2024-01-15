@@ -62,7 +62,6 @@ Application of Array:
 - index()
 - reverse()
 
-
 ```python
 # importing "array" for array operations
 import array
