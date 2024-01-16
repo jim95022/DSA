@@ -691,6 +691,158 @@ class Solution:
 ```
 
 ### Remove loop in Linked List
+
+```text
+Given a linked list of N nodes such that it may contain a loop.
+
+A loop here means that the last node of the link list is connected to the node at position X(1-based index). If the link
+ list does not have any loop, X=0.
+
+Remove the loop from the linked list, if it is present, i.e. unlink the last node which is forming the loop.
+
+
+Example 1:
+
+Input:
+N = 3
+value[] = {1,3,4}
+X = 2
+Output: 1
+Explanation: The link list looks like
+1 -> 3 -> 4
+     ^    |
+     |____|    
+A loop is present. If you remove it 
+successfully, the answer will be 1. 
+
+Example 2:
+
+Input:
+N = 4
+value[] = {1,8,3,4}
+X = 0
+Output: 1
+Explanation: The Linked list does not 
+contains any loop. 
+
+Example 3:
+
+Input:
+N = 4
+value[] = {1,2,3,4}
+X = 1
+Output: 1
+Explanation: The link list looks like 
+1 -> 2 -> 3 -> 4
+^              |
+|______________|
+A loop is present. 
+If you remove it successfully, 
+the answer will be 1. 
+
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function removeLoop() which takes the head 
+of the linked list as the input parameter. Simply remove the loop in the list (if present) without disconnecting any 
+nodes from the list.
+Note: The generated output will be 1 if your submitted code is correct.
+
+
+Expected time complexity: O(N)
+Expected auxiliary space: O(1)
+
+
+Constraints:
+1 ≤ N ≤ 10^4
+```
+
+```python
+class Solution:
+    #Function to remove a loop in the linked list.
+    def removeLoop(self, head):
+
+        fast = head.next
+        slow = head
+        size = 1
+
+        while fast != slow:
+            if not fast or not fast.next:
+                return head
+            slow = slow.next
+            fast = fast.next.next
+
+        fast = fast.next
+
+        while fast != slow:
+            fast = fast.next
+            size += 1
+
+        fast = head
+        slow = head
+
+        for _ in range(size - 1):
+            fast = fast.next
+
+        while fast.next != slow:
+            fast = fast.next
+            slow = slow.next
+
+        fast.next = None
+
+        return head
+```
+
+```python
+class Solution:
+    #Function to remove a loop in the linked list.
+    def removeLoop(self, head):
+        
+        #using two pointers and moving one pointer(slow) by one node and 
+        #another pointer(fast) by two nodes in each iteration.
+        fast = head.next
+        slow = head
+        
+        while fast!=slow:
+            
+            #if the node pointed by first pointer(fast) or the node 
+            #next to it is null, then loop is not present so we return 0.
+            if fast is None or fast.next is None:
+                return
+            
+            fast = fast.next.next
+            slow = slow.next
+            
+        #both pointers now point to the same node in the loop.
+        
+        size = 1
+        fast = fast.next
+    
+        #we start iterating the loop with first pointer and continue till 
+        #both pointers point to same node again.
+        while fast!=slow:
+            fast = fast.next
+            #incrementing the counter which stores length of loop.
+            size+=1
+        
+        #updating the pointers again to starting node.
+        slow=head
+        fast=head
+        
+        #moving pointer (fast) by (size-1) nodes.
+        for _ in range(size-1):
+            fast=fast.next
+        
+        #now we keep iterating with both pointers till fast reaches a node such
+        #that the next node is pointed by slow. At this situation slow is at
+        #the node where loop starts and first at last node so we simply 
+        #update the link part of first.
+        while fast.next != slow:
+            fast=fast.next
+            slow=slow.next
+        
+        #storing null in link part of the last node.
+        fast.next=None
+```
+
 ### n’th node from end of Linked list
 ### Flattening a Linked List
 ### Merge two sorted Linked lists
