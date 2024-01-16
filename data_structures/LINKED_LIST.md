@@ -483,6 +483,133 @@ class Solution:
 ```
 
 ### Intersection point in Y shaped Linked lists
+
+```text
+Given two singly linked lists of size N and M, write a program to get the point where two linked lists intersect each other.
+
+Example 1:
+
+Input:
+LinkList1 = 3->6->9->common
+LinkList2 = 10->common
+common = 15->30->NULL
+Output: 15
+Explanation:
+Y ShapedLinked List
+Example 2:
+
+Input: 
+Linked List 1 = 4->1->common
+Linked List 2 = 5->6->1->common
+common = 8->4->5->NULL
+Output: 8
+Explanation: 
+
+4              5
+|              |
+1              6
+ \             /
+  8   -----  1 
+   |
+   4
+   |
+  5
+  |
+  NULL       
+Your Task:
+You don't need to read input or print anything. The task is to complete the function intersectPoint() which takes the pointer to the head of linklist1(head1) and linklist2(head2) as input parameters and returns data value of a node where two linked lists intersect. If linked list do not merge at any point, then it should return -1.
+Challenge : Try to solve the problem without using any extra space.
+
+ 
+
+Expected Time Complexity: O(N+M)
+Expected Auxiliary Space: O(1)
+
+ 
+
+Constraints:
+Length of Both linkedList before intersection(if any) is greater than 0.
+2 ≤ N + M ≤ 2*105
+-1000 ≤ value ≤ 1000
+```
+
+```python
+#Function to find intersection point in Y shaped Linked Lists.
+def intersetPoint(head1,head2):
+            
+    head1_len = 0
+    head2_len = 0
+
+    current_head = head1
+
+    while current_head:
+        current_head = current_head.next
+        head1_len += 1
+
+    current_head = head2
+
+    while current_head:
+        current_head = current_head.next
+        head2_len += 1
+
+    if head1_len > head2_len:
+        for _ in range(head1_len - head2_len):
+            head1 = head1.next
+    else:
+        for _ in range(head2_len - head1_len):
+            head2 = head2.next
+
+    while head1.next and head2.next:
+        if head1.next == head2.next:
+            return head1.next.data
+        head1 = head1.next
+        head2 = head2.next
+
+    return -1
+```
+
+```python
+def getSize(head):
+    ret = 0
+    while head is not None:
+        head = head.next
+        ret+=1
+    return ret
+
+#Function to find intersection point in Y shaped Linked Lists.
+def intersetPoint(head1,head2):
+    
+    #finding length of list1.
+    n1 = getSize(head1)
+    
+    #finding length of list2.
+    n2 = getSize(head2)
+    
+    #if list1 is longer, we ignore some of its starting
+    #elements till it has as many elements as list2.
+    while n1>n2:
+        head1 = head1.next
+        n1-=1
+    
+    #similarly, if list2 is longer, we ignore some of its starting
+    #elements till it has as many elements as list1.
+    while n2>n1:
+        head2 = head2.next
+        n2-=1
+    
+    
+    #now we simply traverse ahead till we get the intersection point, if there 
+    #is none, this loop will break when both pointers point at NULL.
+    while head1 != head2:
+        head1 = head1.next
+        head2 = head2.next
+
+    # if head1 is not NULL, we return its data otherwise we return -1.
+    if head1 is not None:
+        return head1.data
+    return -1
+```
+
 ### Detect Loop in Linked list
 ### Remove loop in Linked List
 ### n’th node from end of Linked list
