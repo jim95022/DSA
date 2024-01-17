@@ -844,6 +844,89 @@ class Solution:
 ```
 
 ### n’th node from end of Linked list
+
+```text
+Given a linked list consisting of L nodes and given a number N. The task is to find the Nth node from the end of the linked list.
+
+Example 1:
+
+Input:
+N = 2
+LinkedList: 1->2->3->4->5->6->7->8->9
+Output: 8
+Explanation: In the first example, there
+are 9 nodes in linked list and we need
+to find 2nd node from end. 2nd node
+from end is 8.  
+Example 2:
+
+Input:
+N = 5
+LinkedList: 10->5->100->5
+Output: -1
+Explanation: In the second example, there
+are 4 nodes in the linked list and we
+need to find 5th from the end. Since 'n'
+is more than the number of nodes in the
+linked list, the output is -1.
+Your Task:
+The task is to complete the function getNthFromLast() which takes two arguments: reference to head and N and you need to return Nth from the end or -1 in case node doesn't exist.
+
+Note:
+Try to solve in a single traversal.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= L <= 106
+1 <= N <= 106
+```
+
+```python
+def getNthFromLast(head,n):
+    result_head = head
+    step = 0
+    
+    while head:
+        head = head.next
+        if step >= n:
+            result_head = result_head.next
+        step += 1
+        
+    if step < n:
+        return -1
+
+    return result_head.data
+```
+
+```python
+#Function to find the data of nth node from the end of a linked list
+def getNthFromLast(head,n):
+        
+    #using two pointers, similar to finding middle element.
+    curr_node = head
+    nth_node = head
+    
+    #traversing first n elements with first pointer.
+    while n :
+        if n and curr_node == None:
+            return -1
+        curr_node = curr_node.next
+        n-=1
+    
+    #now traversing with both pointers and when first pointer gives null 
+    #we have got the nth node from end in second pointer since the first 
+    #pointer had already traversed n nodes and thus had difference of n 
+    #nodes with second pointer.
+    while curr_node :
+        curr_node = curr_node.next
+        nth_node = nth_node.next
+    
+    #returning the data of nth node from end.
+    return nth_node.data
+```
+
 ### Flattening a Linked List
 ### Merge two sorted Linked lists
 ### Pairwise swap of a Linked list
