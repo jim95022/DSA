@@ -928,6 +928,144 @@ def getNthFromLast(head,n):
 ```
 
 ### Flattening a Linked List
+
+```text
+Given a Linked List of size N, where every node represents a sub-linked-list and contains two pointers:
+(i) a next pointer to the next node,
+(ii) a bottom pointer to a linked list where this node is head.
+Each of the sub-linked-list is in sorted order.
+Flatten the Link List such that all the nodes appear in a single level while maintaining the sorted order. 
+
+Note: The flattened list will be printed using the bottom pointer instead of the next pointer.
+For more clarity have a look at the printList() function in the driver code.
+
+ 
+
+Example 1:
+
+Input:
+5 -> 10 -> 19 -> 28
+|     |     |     | 
+7     20    22   35
+|           |     | 
+8          50    40
+|                 | 
+30               45
+Output:  5-> 7-> 8- > 10 -> 19-> 20->
+22-> 28-> 30-> 35-> 40-> 45-> 50.
+Explanation:
+The resultant linked lists has every 
+node in a single level.
+(Note: | represents the bottom pointer.)
+ 
+
+Example 2:
+
+Input:
+5 -> 10 -> 19 -> 28
+|          |                
+7          22   
+|          |                 
+8          50 
+|                           
+30              
+Output: 5->7->8->10->19->22->28->30->50
+Explanation:
+The resultant linked lists has every
+node in a single level.
+
+(Note: | represents the bottom pointer.)
+ 
+
+Your Task:
+You do not need to read input or print anything. Complete the function flatten() that takes the head of the linked list as input parameter and returns the head of flattened link list.
+
+Expected Time Complexity: O(N*N*M)
+Expected Auxiliary Space: O(N)
+
+Constraints:
+0 <= N <= 50
+```
+
+```python
+def flatten(root):
+
+    flatten_root = root
+    current_root = root
+
+    while current_root:
+        if current_root.bottom:
+            bottom_root = current_root.bottom
+            current_root.bottom = None
+            temp_root = flatten_root
+
+            while bottom_root:
+                if not temp_root.next:
+                    temp_root.next = bottom_root
+                    bottom_root = bottom_root.bottom
+                    temp_root.next.bottom = None
+                elif int(bottom_root.data) < int(temp_root.next.data):
+                    bottom_root.next = temp_root.next
+                    temp_root.next = bottom_root
+                    bottom_root = bottom_root.bottom
+                    temp_root.next.bottom = None
+                else:
+                    temp_root = temp_root.next
+        else:
+            current_root = current_root.next
+
+    current_root = flatten_root
+
+    while current_root:
+        temp = current_root.next
+        current_root.bottom = temp
+        current_root.next = None
+        current_root = temp
+
+    return flatten_root
+```
+
+```python
+#Function to merge two linked lists.
+def merge(a,b):
+    if a is None:
+        return b
+
+    if b is None:
+        return a
+
+    
+    result=None
+    
+    #Comparing the data of the two linked lists.
+    #If data in linked list a is smaller, assign a as result
+    #and recursively call merge on the bottom of a and b.
+    if a.data<b.data:
+        result=a
+        result.bottom=merge(a.bottom,b)
+    #If data in linked list b is smaller, assign b as result
+    #and recursively call merge on a and the bottom of b.
+    else:
+        result=b
+        result.bottom=merge(a,b.bottom)
+    return result
+    
+    
+
+#Function to flatten the given linked list.
+def flatten(root):
+    #Checking if the linked list is empty or has only one node.
+    if root is None or root.next is None:
+        return root
+
+    #Recursively flatten the rest of the linked list.
+    root.next=flatten(root.next)
+    
+    #Merge the current linked list with the flattened rest of the list.
+    root=merge(root,root.next)
+    return root
+```
+
 ### Merge two sorted Linked lists
 ### Pairwise swap of a Linked list
 ### Add two numbers represented by Linked lists
