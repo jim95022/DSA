@@ -1416,6 +1416,147 @@ class Solution:
 ```
 
 ### Check if Linked List is Palindrome
+
+```text
+Given a singly linked list of size N of integers. The task is to check if the given linked list is palindrome or not.
+
+Example 1:
+
+Input:
+N = 3
+value[] = {1,2,1}
+Output: 1
+Explanation: The given linked list is
+1 2 1 , which is a palindrome and
+Hence, the output is 1.
+Example 2:
+
+Input:
+N = 4
+value[] = {1,2,3,4}
+Output: 0
+Explanation: The given linked list
+is 1 2 3 4 , which is not a palindrome
+and Hence, the output is 0.
+Your Task:
+The task is to complete the function isPalindrome() which takes head as reference as the only parameter and returns true or false if linked list is palindrome or not respectively.
+
+Expected Time Complexity: O(N)
+Expected Auxialliary Space Usage: O(1)  (ie, you should not use the recursive stack space as well)
+
+Constraints:
+1 <= N <= 105
+```
+
+```python
+#Function to check whether the list is palindrome.
+class Solution:
+    def isPalindrome(self, head):
+
+        values = []
+
+        while head:
+            values.append(head.data)
+            head = head.next
+
+        for i in range(len(values) // 2):
+            if values[i] != values[-i - 1]:
+                return False
+        return True
+```
+
+```python
+class Solution:
+    def isPalindrome(self, head):
+
+        size = 0
+
+        current_head = head
+
+        while current_head:
+            current_head = current_head.next
+            size += 1
+
+        half_head = head
+
+        for _ in range(size // 2):
+            half_head = half_head.next
+            
+        half_head_reversed = None
+        
+        while half_head:
+            temp_head = half_head.next
+            half_head.next = half_head_reversed
+            half_head_reversed = half_head
+            half_head = temp_head
+
+        while half_head_reversed:
+            if head.data != half_head_reversed.data:
+                return False
+            head = head.next
+            half_head_reversed = half_head_reversed.next
+
+        return True
+```
+
+```python
+class Solution:
+    # solution
+    
+    
+    #Function to reverse a linked list.
+    def reverseList(self, temp):  
+        current = temp;  
+        prevNode = None;  
+        nextNode = None;  
+          
+        while(current != None):  
+            nextNode = current.next;  
+            current.next = prevNode;  
+            prevNode = current;  
+            current = nextNode;  
+        return prevNode;  
+              
+    
+    
+    #Function to return the size of linked list.
+    def getSize(self, head):
+        count = 0
+        curr_node = head
+        while curr_node:
+            count +=1
+            curr_node = curr_node.next
+        return count
+    
+    #Function to check whether the list is palindrome.
+    def isPalindrome(self, head):  
+        current = head;  
+        flag = True;  
+        
+        #finding number of nodes in the list.  
+        s = self.getSize(head)
+        mid = (s//2) if(s%2 == 0) else ((s+1)//2);  
+          
+        #finding the middle node in given singly linked list.  
+        for i in range(1, mid):  
+            current = current.next;  
+              
+        #reversing the list after middle node to end. 
+        revHead = self.reverseList(current.next);  
+          
+        #comparing nodes of first half and second half of list.  
+        while(head != None and revHead != None):  
+            if(head.data != revHead.data):  
+                flag = False;  
+                break;  
+                  
+            head = head.next;  
+            revHead = revHead.next;  
+        
+        #returning 1 if list is palindrome else 0.    
+        return flag
+```
+
 ### Implement Queue using Linked List
 ### Implement Stack using Linked List
 ### Given a Linked list of 0s, 1s and 2s, sort it
