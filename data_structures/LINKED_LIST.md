@@ -1171,6 +1171,90 @@ def sortedMerge(head1, head2):
 ```
 
 ### Pairwise swap of a Linked list
+
+```text
+Given a singly linked list of size N. The task is to swap elements in the linked list pairwise.
+For example, if the input list is 1 2 3 4, the resulting list after swaps will be 2 1 4 3.
+Note: You need to swap the nodes, not only the data. If only data is swapped then driver will print -1.
+
+Example 1:
+
+Input:
+LinkedList: 1->2->2->4->5->6->7->8
+Output: 
+2 1 4 2 6 5 8 7
+Explanation: 
+After swapping each pair considering (1,2), (2, 4), (5, 6).. so on as pairs, we get 2, 1, 4, 2, 6, 5, 8, 7 as a new linked list.
+Example 2:
+
+Input:
+LinkedList: 1->3->4->7->9->10->1
+Output: 
+3 1 7 4 10 9 1
+Explanation: 
+After swapping each pair considering (1,3), (4, 7), (9, 10).. so on as pairs, we get 3, 1, 7, 4, 10, 9, 1 as a new linked list.
+Your Task:
+The task is to complete the function pairWiseSwap() which takes the head node as the only argument and returns the head of modified linked list.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 ≤ N ≤ 105
+```
+
+```python
+class Solution:    
+    def pairWiseSwap(self, head):
+        
+        if head.next:
+            swapped_head = head.next
+        else:
+            swapped_head = head
+            
+        prev_head = None
+
+        while head and head.next:
+            current_head = head.next
+            if prev_head:
+                prev_head.next = current_head
+            prev_head = head
+            head = head.next.next
+
+            current_head.next = prev_head
+            prev_head.next = head
+
+        return swapped_head
+```
+
+```python
+class Solution:    
+    def pairWiseSwap(self, head):
+        a = head
+        b, c, prev = None, None, None
+        
+        while a and a.next:
+            b = a.next     # b is second node
+            c = b.next     # c is third node (c might be null)
+                           # current order : prev - a - b - c
+            
+            if a == head:
+                # b will be new head
+                head = b
+            else:
+                # else, linking second node i.e. b, to a's ancestor
+                prev.next = b
+            
+            b.next = a     # a should now come after b
+            a.next = c     # connecting a to list ahead
+            
+            # now we have to update a and prev for next pair
+            prev = a
+            a = c
+            
+        return head
+```
+
 ### Add two numbers represented by Linked lists
 ### Check if Linked List is Palindrome
 ### Implement Queue using Linked List
