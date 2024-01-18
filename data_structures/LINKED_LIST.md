@@ -1067,6 +1067,109 @@ def flatten(root):
 ```
 
 ### Merge two sorted Linked lists
+
+```text
+Given two sorted linked lists consisting of N and M nodes respectively. The task is to merge both of the list (in-place) and return head of the merged list.
+ 
+
+Example 1:
+
+Input:
+N = 4, M = 3 
+valueN[] = {5,10,15,40}
+valueM[] = {2,3,20}
+Output: 2 3 5 10 15 20 40
+Explanation: After merging the two linked
+lists, we have merged list as 2, 3, 5,
+10, 15, 20, 40.
+Example 2:
+
+Input:
+N = 2, M = 2
+valueN[] = {1,1}
+valueM[] = {2,4}
+Output:1 1 2 4
+Explanation: After merging the given two
+linked list , we have 1, 1, 2, 4 as
+output.
+Your Task:
+The task is to complete the function sortedMerge() which takes references to the heads of two linked lists as the arguments and returns the head of merged linked list.
+
+Expected Time Complexity : O(n+m)
+Expected Auxilliary Space : O(1)
+
+Constraints:
+1 <= N, M <= 104
+0 <= Node's data <= 105
+```
+
+```python
+def sortedMerge(head1, head2):
+    head = None
+
+    while head1 and head2:
+        if head1.data < head2.data:
+            if head:
+                head.next = head1
+                head1 = head1.next
+                head = head.next
+            else:
+                head = head1
+                merged_head = head
+                head1 = head1.next
+        else:
+            if head:
+                head.next = head2
+                head2 = head2.next
+                head = head.next
+            else:
+                head = head2
+                merged_head = head
+                head2 = head2.next
+
+    if head1:
+        head.next = head1
+    elif head2:
+        head.next = head2
+
+    return merged_head
+```
+
+```python
+def sortedMerge(head1, head2):
+    #creating a dummy first node to hang the result on.
+    dummy = Node(0)
+  
+    #a pointer, tail is used to store the resultant list after merging.
+    tail = dummy
+
+    while head1 is not None and head2 is not None:
+        
+        #comparing the data of the two lists and storing the node with smaller
+        #data in link part of the tail node.
+        if head1.data <= head2.data:
+            tail.next = head1
+            #if data in first list is smaller, we move to the next node in it.
+            head1 = head1.next;
+        
+        else:
+            tail.next = head2
+            #if data in second list is smaller, we move to the next node in it.
+            head2 = head2.next
+        #moving to the next node.
+        tail = tail.next; 
+    
+    #if either list runs out, we store all the nodes of other
+    #list in link part of the tail node.
+    if head1 is None:
+        tail.next = head2
+    if head2 is None:
+        tail.next = head1
+    
+    #returning the merged list attached to dummy.
+    return dummy.next
+```
+
 ### Pairwise swap of a Linked list
 ### Add two numbers represented by Linked lists
 ### Check if Linked List is Palindrome
