@@ -1256,6 +1256,165 @@ class Solution:
 ```
 
 ### Add two numbers represented by Linked lists
+
+```text
+Given two decimal numbers represented by two linked lists of size N and M respectively. The task is to return a linked list that represents the sum of these two numbers.
+
+For example, the number 190 will be represented by the linked list, 1->9->0->null, similarly 25 by 2->5->null. Sum of these two numbers is 190 + 25 = 215, which will be represented by 2->1->5->null. You are required to return the head of the linked list 2->1->5->null.
+
+Example 1:
+
+Input:
+N = 2
+valueN[] = {4,5}
+M = 3
+valueM[] = {3,4,5}
+Output: 3 9 0  
+Explanation: For the given two linked
+list (4 5) and (3 4 5), after adding
+the two linked list resultant linked
+list will be (3 9 0).
+Example 2:
+
+Input:
+N = 2
+valueN[] = {6,3}
+M = 1
+valueM[] = {7}
+Output: 7 0
+Explanation: For the given two linked
+list (6 3) and (7), after adding the
+two linked list resultant linked list
+will be (7 0).
+Your Task:
+The task is to complete the function addTwoLists() which has node reference of both the linked lists and returns the head of the sum list.   
+
+Expected Time Complexity: O(N+M)
+Expected Auxiliary Space: O(Max(N,M)) for the resultant list.
+
+Constraints:
+1 <= N, M <= 5000
+```
+
+```python
+class Solution:
+    #Function to add two numbers represented by linked list.
+    def addTwoLists(self, first, second):
+        
+        reversed_first = None
+        first_count = 0
+        second_count = 0
+        
+        while first:
+            first_count += 1
+            temp_head = first.next
+            first.next = reversed_first
+            reversed_first = first
+            first = temp_head
+
+        reversed_second = None
+
+        while second:
+            second_count += 1
+            temp_head = second.next
+            second.next = reversed_second
+            reversed_second = second
+            second = temp_head
+        
+        if first_count > second_count:
+            max_head, min_head = reversed_first, reversed_second
+        else:
+            max_head, min_head = reversed_second, reversed_first
+
+        extra = False
+        reversed_max = None
+
+        while max_head:
+
+            if min_head:
+                max_head.data = int(max_head.data) + int(min_head.data)
+                min_head = min_head.next
+
+            if extra:
+                max_head.data += 1
+                extra = False
+
+            if max_head.data >= 10:
+                max_head.data -= 10
+                extra = True
+
+            temp_head = max_head.next
+            max_head.next = reversed_max
+            reversed_max = max_head
+            max_head = temp_head
+
+        if extra:
+            temp_head = reversed_max
+            reversed_max = Node(1)
+            reversed_max.next = temp_head
+
+        return reversed_max
+```
+
+```python
+class Solution:
+    #Function to reverse the linked list.
+    def reverse(self, head):
+        prev = None
+        current = head
+        next = None
+        
+        while current is not None:
+            next = current.next      
+            current.next = prev   
+            prev = current       
+            current = next    
+        
+        return prev
+    
+    #Function to add two numbers represented by linked list.
+    def addTwoLists(self, first, second):
+        
+        #reversing both lists to simplify addition.
+        first = self.reverse(first)  
+        second = self.reverse(second)  
+        
+        sumList = None
+        carry = 0
+        
+        #using a loop till both lists and carry gets exhausted.
+        while first is not None or second is not None or carry>0:
+            #using a variable to store sum of two digits along with carry.
+            newVal = carry
+            
+            #if nodes are left in any of the lists, we add their data in newVal.
+            if first is not None:
+                newVal += first.data
+            if second is not None:
+                newVal += second.data
+            
+            #updating carry.
+            carry = newVal//10
+            #using modulus to store only a single digit at that place.
+            newVal = newVal%10       
+            
+            #creating new node which gets connected with other nodes that 
+            #we get after calculating sum of respective digits
+            newNode = Node(newVal)
+            #storing the previously made nodes in the link part of new node.
+            newNode.next = sumList
+            #making the new node as the first node of all previously made node.
+            sumList = newNode
+            
+            #moving ahead in both lists.
+            if first:
+                first = first.next    
+            if second:
+                second= second.next
+        
+        return sumList
+```
+
 ### Check if Linked List is Palindrome
 ### Implement Queue using Linked List
 ### Implement Stack using Linked List
