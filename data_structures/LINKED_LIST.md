@@ -1180,7 +1180,7 @@ Note: You need to swap the nodes, not only the data. If only data is swapped the
 Example 1:
 
 Input:
-LinkedList: 1->2->2->4->5->6->7->8
+LinkedList: 1 -> 2 -> 2 -> 4 -> 5 -> 6 -> 7 -> 8
 Output: 
 2 1 4 2 6 5 8 7
 Explanation: 
@@ -1188,7 +1188,7 @@ After swapping each pair considering (1,2), (2, 4), (5, 6).. so on as pairs, we 
 Example 2:
 
 Input:
-LinkedList: 1->3->4->7->9->10->1
+LinkedList: 1 -> 3 -> 4 -> 7 -> 9 -> 10 -> 1
 Output: 
 3 1 7 4 10 9 1
 Explanation: 
