@@ -316,6 +316,8 @@ Explanation:
 Rotate 1: 4 -> 7 -> 8 -> 9 -> 2
 Rotate 2: 7 -> 8 -> 9 -> 2 -> 4
 Rotate 3: 8 -> 9 -> 2 -> 4 -> 7
+
+
 Example 2:
 
 Input:
@@ -418,6 +420,8 @@ Explanation:
 The first 4 elements 1,2,2,4 are reversed first 
 and then the next 4 elements 5,6,7,8. Hence, the 
 resultant linked list is 4->2->2->1->8->7->6->5.
+
+
 Example 2:
 
 Input:
@@ -496,6 +500,8 @@ common = 15->30->NULL
 Output: 15
 Explanation:
 Y ShapedLinked List
+
+
 Example 2:
 
 Input: 
@@ -628,6 +634,8 @@ given. Then value of x=2 is given which
 means last node is connected with xth
 node of linked list. Therefore, there
 exists a loop.
+
+
 Example 2:
 
 Input:
@@ -858,6 +866,8 @@ Explanation: In the first example, there
 are 9 nodes in linked list and we need
 to find 2nd node from end. 2nd node
 from end is 8.  
+
+
 Example 2:
 
 Input:
@@ -1082,6 +1092,8 @@ Output: 2 3 5 10 15 20 40
 Explanation: After merging the two linked
 lists, we have merged list as 2, 3, 5,
 10, 15, 20, 40.
+
+
 Example 2:
 
 Input:
@@ -1185,6 +1197,8 @@ Output:
 2 1 4 2 6 5 8 7
 Explanation: 
 After swapping each pair considering (1,2), (2, 4), (5, 6).. so on as pairs, we get 2, 1, 4, 2, 6, 5, 8, 7 as a new linked list.
+
+
 Example 2:
 
 Input:
@@ -1274,6 +1288,8 @@ Explanation: For the given two linked
 list (4 5) and (3 4 5), after adding
 the two linked list resultant linked
 list will be (3 9 0).
+
+
 Example 2:
 
 Input:
@@ -1429,6 +1445,8 @@ Output: 1
 Explanation: The given linked list is
 1 2 1 , which is a palindrome and
 Hence, the output is 1.
+
+
 Example 2:
 
 Input:
