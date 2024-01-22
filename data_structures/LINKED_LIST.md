@@ -623,7 +623,6 @@ def intersetPoint(head1,head2):
 Given a linked list of N nodes. The task is to check if the linked list has a loop. Linked list can contain self loop.
 
 Example 1:
-
 Input:
 N = 3
 value[] = {1,3,4}
@@ -638,7 +637,6 @@ exists a loop.
 
 
 Example 2:
-
 Input:
 N = 4
 value[] = {1,8,3,4}
