@@ -1162,14 +1162,14 @@ def sortedMerge(head1, head2):
         if head1.data <= head2.data:
             tail.next = head1
             #if data in first list is smaller, we move to the next node in it.
-            head1 = head1.next;
+            head1 = head1.next
         
         else:
             tail.next = head2
             #if data in second list is smaller, we move to the next node in it.
             head2 = head2.next
         #moving to the next node.
-        tail = tail.next; 
+        tail = tail.next 
     
     #if either list runs out, we store all the nodes of other
     #list in link part of the tail node.
@@ -1524,16 +1524,16 @@ class Solution:
     
     #Function to reverse a linked list.
     def reverseList(self, temp):  
-        current = temp;  
-        prevNode = None;  
-        nextNode = None;  
+        current = temp  
+        prevNode = None  
+        nextNode = None  
           
         while(current != None):  
-            nextNode = current.next;  
-            current.next = prevNode;  
-            prevNode = current;  
-            current = nextNode;  
-        return prevNode;  
+            nextNode = current.next  
+            current.next = prevNode  
+            prevNode = current  
+            current = nextNode  
+        return prevNode  
               
     
     
@@ -1548,28 +1548,28 @@ class Solution:
     
     #Function to check whether the list is palindrome.
     def isPalindrome(self, head):  
-        current = head;  
-        flag = True;  
+        current = head  
+        flag = True  
         
         #finding number of nodes in the list.  
         s = self.getSize(head)
-        mid = (s//2) if(s%2 == 0) else ((s+1)//2);  
+        mid = (s//2) if(s%2 == 0) else ((s+1)//2)  
           
         #finding the middle node in given singly linked list.  
         for i in range(1, mid):  
-            current = current.next;  
+            current = current.next  
               
         #reversing the list after middle node to end. 
-        revHead = self.reverseList(current.next);  
+        revHead = self.reverseList(current.next)  
           
         #comparing nodes of first half and second half of list.  
         while(head != None and revHead != None):  
             if(head.data != revHead.data):  
-                flag = False;  
-                break;  
+                flag = False  
+                break  
                   
-            head = head.next;  
-            revHead = revHead.next;  
+            head = head.next  
+            revHead = revHead.next  
         
         #returning 1 if list is palindrome else 0.    
         return flag
