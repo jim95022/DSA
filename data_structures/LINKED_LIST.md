@@ -1828,5 +1828,142 @@ class MyStack:
 ```
 
 ### Given a Linked list of 0s, 1s and 2s, sort it
+
+```text
+Given a linked list of N nodes where nodes can contain values 0s, 1s, and 2s only. The task is to segregate 0s, 1s, and 2s linked list such that all zeros segregate to head side, 2s at the end of the linked list, and 1s in the mid of 0s and 2s.
+
+Example 1:
+
+Input:
+N = 8
+value[] = {1,2,2,1,2,0,2,2}
+Output: 0 1 1 2 2 2 2 2
+Explanation: All the 0s are segregated
+to the left end of the linked list,
+2s to the right end of the list, and
+1s in between.
+Example 2:
+
+Input:
+N = 4
+value[] = {2,2,0,1}
+Output: 0 1 2 2
+Explanation: After arranging all the
+0s,1s and 2s in the given format,
+the output will be 0 1 2 2.
+Your Task:
+The task is to complete the function segregate() which segregates the nodes in the linked list as asked in the problem statement and returns the head of the modified linked list. The printing is done automatically by the driver code.
+
+Expected Time Complexity: O(N).
+Expected Auxiliary Space: O(N).
+
+Constraints:
+1 <= N <= 106
+```
+
+```python
+class Solution:
+
+    def add_to_linked_list(self, linked_list, node):
+        temp_linked_list = linked_list
+        linked_list = node
+        linked_list.next = temp_linked_list
+        return linked_list
+
+    def get_last_node(self, linked_list):
+        while linked_list.next:
+            linked_list = linked_list.next
+        return linked_list
+
+    # Function to sort a linked list of 0s, 1s and 2s.
+    def segregate(self, head):
+
+        zeros = None
+        ones = None
+        twos = None
+
+        modified_linked_list = None
+        current_node = None
+
+        while head:
+
+            temp = head.next
+            data = int(head.data)
+
+            if data == 0:
+                zeros = self.add_to_linked_list(zeros, head)
+            elif data == 1:
+                ones = self.add_to_linked_list(ones, head)
+            elif data == 2:
+                twos = self.add_to_linked_list(twos, head)
+
+            head = temp
+
+        if zeros:
+            current_node = zeros
+            modified_linked_list = zeros
+            current_node = self.get_last_node(current_node)
+
+        if ones:
+            if current_node:
+                current_node.next = ones
+            else:
+                modified_linked_list = ones
+                current_node = ones
+            current_node = self.get_last_node(current_node)
+
+        if twos:
+            if current_node:
+                current_node.next = twos
+            else:
+                modified_linked_list = twos
+
+        return modified_linked_list
+```
+
+```python
+class Solution:
+    #Function to sort a linked list of 0s, 1s and 2s.
+    def segregate(self, head):
+        
+        #creating three dummy nodes to point to beginning of three linked lists.
+        zeroD = Node(0)
+        oneD = Node(1)
+        twoD = Node(2)
+    
+        #initializing current pointers for three lists.
+        zero = zeroD
+        one = oneD
+        two = twoD
+        
+        
+        curr_node = head
+        #traversing over the list with a pointer.
+        while curr_node :
+            
+            #we check data at current node and store the node in it's
+            #respective list and update the link part of that list.
+            if curr_node.data == 0:
+                zero.next = curr_node
+                zero = zero.next
+            elif curr_node.data == 1:
+                one.next = curr_node
+                one = one.next
+            else:
+                two.next = curr_node
+                two =two.next
+            curr_node = curr_node.next
+        
+        #attaching the three lists containing 0s,1s and 2s respectively.
+        if oneD.next :
+            zero.next = oneD.next
+        else:
+            zero.next = twoD.next
+        one.next = twoD.next
+        two.next = None
+        
+        return zeroD.next
+```
+
 ### Delete without head pointer
 ### Merge Sort for Linked Lists
