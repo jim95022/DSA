@@ -1576,6 +1576,128 @@ class Solution:
 ```
 
 ### Implement Queue using Linked List
+
+```text
+Implement a Queue using Linked List. 
+A Query Q is of 2 Types
+(i) 1 x   (a query of this type means  pushing 'x' into the queue)
+(ii) 2     (a query of this type means to pop an element from the queue and print the poped element)
+
+Example 1:
+
+Input:
+Q = 5
+Queries = 1 2 1 3 2 1 4 2
+Output: 2 3
+Explanation: n the first testcase
+1 2 the queue will be {2}
+1 3 the queue will be {2 3}
+2   poped element will be 2 the
+    queue will be {3}
+1 4 the queue will be {3 4}
+2   poped element will be 3.
+
+Example 2:
+
+Input:
+Q = 4
+Queries = 1 2 2 2 1 3 
+Output: 2 -1
+Explanation: In the second testcase 
+1 2 the queue will be {2}
+2   poped element will be {2} then
+    the queue will be empty. 
+2   the queue is empty and hence -1
+1 3 the queue will be {3}.
+Your Task:
+Complete the function push() which takes an integer as input parameter and pop() which will remove and return an element(-1 if queue is empty).
+
+Expected Time Complexity: O(1).
+Expected Auxiliary Space: O(1).
+
+Constraints:
+1 <= Q <= 100
+1 <= x <= 100
+```
+
+```python
+class MyQueue:
+    head = None
+    node = None
+
+    # Function to push an element into the queue.
+    def push(self, item):
+        new_node = Node(item)
+
+        if not self.head:
+            self.head = new_node
+            self.node = new_node
+        else:
+            self.node.next = new_node
+            self.node = self.node.next
+    # Add code here
+
+    # Function to pop front element from the queue.
+    def pop(self):
+
+        if not self.head:
+            return -1
+        else:
+            temp = self.head.next
+            data = self.head.data
+            self.head.next = None
+            self.head = temp
+            return data
+```
+
+```python
+class Node: 
+      
+    def __init__(self, data): 
+        self.data = data 
+        self.next = None
+  
+
+class MyQueue: 
+      
+    def __init__(self): 
+        self.front = self.rear = None
+  
+    def isEmpty(self): 
+        return self.front == None
+      
+    #Function to push an element into the queue.
+    def push(self, item): 
+        temp = Node(item) 
+        
+        #if queue is empty, then new node is front and rear both.
+        if self.rear == None: 
+            self.front = self.rear = temp 
+            return
+        
+        #adding the new node at the end of queue and changing rear.
+        self.rear.next = temp 
+        self.rear = temp 
+  
+    #Function to pop front element from the queue. 
+    def pop(self): 
+         
+        #if queue is empty, we return -1. 
+        if self.isEmpty(): 
+            return -1
+            
+        #we delete front and update front as new temp(temp.next).
+        temp = self.front 
+        self.front = temp.next
+  
+        #if front is NULL, we also make rear as NULL.
+        if(self.front == None): 
+            self.rear = None
+            
+        #returning the popped element.
+        return str(temp.data) 
+```
+
 ### Implement Stack using Linked List
 ### Given a Linked list of 0s, 1s and 2s, sort it
 ### Delete without head pointer
