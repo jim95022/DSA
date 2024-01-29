@@ -2028,3 +2028,165 @@ class Solution:
 ```
 
 ### Merge Sort for Linked Lists
+
+```text
+Given Pointer/Reference to the head of the linked list, the task is to Sort the given linked list using Merge Sort.
+Note: If the length of linked list is odd, then the extra node should go in the first list while splitting.
+
+Example 1:
+
+Input:
+N = 5
+value[]  = {3,5,2,4,1}
+Output: 1 2 3 4 5
+Explanation: After sorting the given
+linked list, the resultant matrix
+will be 1->2->3->4->5.
+Example 2:
+
+Input:
+N = 3
+value[]  = {9,15,0}
+Output: 0 9 15
+Explanation: After sorting the given
+linked list , resultant will be
+0->9->15.
+Your Task:
+For C++ and Python: The task is to complete the function mergeSort() which sort the linked list using merge sort function.
+For Java: The task is to complete the function mergeSort() and return the node which can be used to print the sorted linked list.
+
+Expected Time Complexity: O(N*Log(N))
+Expected Auxiliary Space: O(N)
+
+Constraints:
+1 <= N <= 105
+```
+
+```python
+class Solution:
+    # Function to sort the given linked list using Merge Sort.
+    def mergeSort(self, head):
+        current_head = head
+        size = 0
+
+        while current_head:
+            current_head = current_head.next
+            size += 1
+
+        middle_head = head
+        middle_size = size // 2 - 1
+
+        for _ in range(middle_size):
+            middle_head = middle_head.next
+
+        temp = middle_head.next
+        middle_head.next = None
+        middle_head = temp
+
+        if size > 2:
+            head = self.mergeSort(head)
+            middle_head = self.mergeSort(middle_head)
+
+        if not middle_head or middle_head.data > head.data:
+            merged_head = head
+            head = head.next
+        else:
+            merged_head = middle_head
+            middle_head = middle_head.next
+
+        current_head = merged_head
+
+        while head or middle_head:
+            if not head:
+                current_head.next = middle_head
+                middle_head = middle_head.next
+            elif not middle_head:
+                current_head.next = head
+                head = head.next
+            elif head.data >= middle_head.data:
+                current_head.next = middle_head
+                middle_head = middle_head.next
+            elif head.data < middle_head.data:
+                current_head.next = head
+                head = head.next
+            current_head = current_head.next
+
+        return merged_head
+```
+
+```python
+class Solution:
+    
+    #Function to return the size of linked list.
+    def getSize(self, head):
+        count = 0
+        curr_node = head
+        while curr_node:
+            count +=1
+            curr_node = curr_node.next
+        return count
+    
+    #Function to split the list into two halves.
+    def splitList(self, source): 
+        if source == None or source.next == None:
+            frontRef = source
+            backRef = None
+        else:
+            size = self.getSize(source)
+            length = (size+1)//2
+    
+            frontRef = source
+            while length>1:
+                length-=1
+                frontRef = frontRef.next
+    
+            backRef = frontRef.next
+            frontRef.next = None
+        
+        #returning the two halves of list.
+        return [source,backRef]
+    
+    #Function to merge two halves of list.
+    def mergeList(self, head_a,head_b):
+        result = LinkedList()
+        
+        #base cases when either of two halves is null.
+        if head_a == None:
+            return head_b
+        if head_b == None:
+            return head_a
+    
+        #comparing data in both halves and storing the smaller in result and
+        #recursively calling the mergeList function for next node in result.
+        if head_a.data <= head_b.data:
+            result.head = head_a
+            result.head.next = self.mergeList(head_a.next,head_b)
+        else:
+            result.head = head_b
+            result.head.next = self.mergeList(head_a, head_b.next)
+        
+        #returning the resultant list.
+        return result.head
+    
+    
+    #Function to sort the given linked list using Merge Sort.
+    def mergeSort(self, head):
+       
+        a = LinkedList()
+        b = LinkedList()
+    
+        if head == None or head.next == None:
+            return head
+            
+        #splitting the list into two halves.
+        node_list = self.splitList(head) 
+        a.head = node_list[0] 
+        b.head = node_list[1] 
+    
+        #calling the mergeSort function recursively for both parts separately.
+        a.head = self.mergeSort(a.head) 
+        b.head = self.mergeSort(b.head)
+        
+        #calling the function to merge both halves.
+        return self.mergeList(a.head,b.head)
+```
