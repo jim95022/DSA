@@ -132,6 +132,11 @@ class Solution:
                 third_element = second_element
                 second_element = first_element
                 first_element = el
+            elif not second_element or el > second_element:
+                third_element = second_element
+                second_element = el
+            elif not third_element or el > third_element:
+                third_element = el
 
         return first_element, second_element, third_element
 ```
