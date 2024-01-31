@@ -84,6 +84,99 @@ for i in range (len(arr)):
     print(arr[i], end=" ")
 ```
 
+## Standard Easy Problems on Array:
+
+### Find the largest three elements in an array
+
+```
+Given an array of N positive integers, print k largest elements from the array. 
+
+Example 1:
+
+Input:
+N = 5, k = 2
+arr[] = {12,5,787,1,23}
+Output: 787 23
+Explanation: First largest element in
+the array is 787 and the second largest
+is 23.
+Example 2:
+
+Input:
+N = 7, k = 3
+arr[] = {1,23,12,9,30,2,50}
+Output: 50 30 23
+Explanation: Three Largest element in
+the array are 50, 30 and 23.
+Your Task:
+Complete the function kLargest() that takes the array, N and K as input parameters and returns a list of k largest element in descending order. 
+
+Expected Time Complexity: O(N log K)
+Expected Auxiliary Space: O(K)
+
+Constraints:
+1 ≤ N ≤ 104
+K ≤ N
+1 ≤ array[i] ≤ 105
+```
+
+```python
+class Solution:
+    # Function to return k=3 largest elements from an array.
+    def kLargest(self, li, n, k=3):
+
+        first_element, second_element, third_element = None, None, None
+
+        for el in li:
+            if not first_element or el > first_element:
+                third_element = second_element
+                second_element = first_element
+                first_element = el
+
+        return first_element, second_element, third_element
+```
+
+```python
+#Back-end complete function Template for Python 3
+
+import heapq
+class Solution:
+    #Function to return k largest elements from an array.
+    def kLargest(self,li,n,k):
+        heap = []
+        for value in li:
+            #pushing the current value in Heap.
+            heapq.heappush(heap, value)
+            #if size of Heap becomes greater than k, we pop the element.
+            if len(heap) > k:
+                heapq.heappop(heap)
+        
+        ans = []
+        
+        #while heap is not empty, we store the top element in list and pop it.
+        while len(heap) > 0:
+            ans.append(heapq.heappop(heap))
+            
+        #reversing the list and returning it.
+        ans.reverse()
+        return ans
+```
+
+### Find Second largest element in an array
+### Move all zeroes to end of array
+### Rearrange array such that even positioned are greater than odd
+### Rearrange an array in maximum minimum form using Two Pointer Technique
+### Segregate even and odd numbers
+### Reversal algorithm for array rotation
+### Print left rotation of array in O(n) time and O(1) space
+### Sort an array in wave form
+### Sort an array which contain 1 to n values
+### Count the number of possible triangles
+### Print All Distinct Elements of a given integer array
+### Find the element that appears once in Array where every other element appears twice
+### Leaders in an array
+### Find sub-array with given sum
+
 # String
 > Strings are defined as an array of characters. The difference between a character array and a string is the string is 
 > terminated with a special character ‘\0’.
