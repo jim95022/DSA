@@ -163,6 +163,82 @@ class Solution:
 ```
 
 ### Find Second largest element in an array
+
+```text
+Given an array Arr of size N, print second largest distinct element from an array.
+
+Example 1:
+
+Input: 
+N = 6
+Arr[] = {12, 35, 1, 10, 34, 1}
+Output: 34
+Explanation: The largest element of the 
+array is 35 and the second largest element
+is 34.
+Example 2:
+
+Input: 
+N = 3
+Arr[] = {10, 5, 10}
+Output: 5
+Explanation: The largest element of 
+the array is 10 and the second 
+largest element is 5.
+Your Task:
+You don't need to read input or print anything. Your task is to complete the function print2largest() which takes the array of integers arr and n as parameters and returns an integer denoting the answer. If 2nd largest element doesn't exist then return -1.
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(1)
+
+Constraints:
+2 ≤ N ≤ 105
+1 ≤ Arri ≤ 105
+```
+
+Time Complexity: O(n), where n is the size of input array.
+Auxiliary space: O(1), as no extra space is required.
+
+```python
+class Solution:
+    def print2largest(self,arr, n):
+		
+        first_element, second_element = None, None
+
+        for el in arr:
+            if first_element is None or el > first_element:
+                second_element = first_element
+                first_element = el
+            elif (second_element is None or el > second_element) and el != first_element:
+                second_element = el
+        if second_element:
+            return second_element
+        return -1
+```
+
+Time Complexity: O(n), where n is the size of input array.
+Auxiliary space: O(1), as no extra space is required.
+
+```python
+class Solution:
+
+	def print2largest(self,arr, n):
+		
+        first_max, second_max = None, None
+
+        for el in arr:
+            if first_max is None or el > first_max:
+                first_max = el
+
+        for el in arr:
+            if (second_max is None or el > second_max) and el != first_max:
+                second_max = el
+
+        if second_max:
+            return second_max
+        return -1
+```
+
 ### Move all zeroes to end of array
 ### Rearrange array such that even positioned are greater than odd
 ### Rearrange an array in maximum minimum form using Two Pointer Technique
