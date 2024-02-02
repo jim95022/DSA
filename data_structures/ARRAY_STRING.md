@@ -316,6 +316,7 @@ class Solution:
 ```
 
 ### Rearrange array such that even positioned are greater than odd
+
 ### Rearrange an array in maximum minimum form using Two Pointer Technique
 ### Segregate even and odd numbers
 ### Reversal algorithm for array rotation
