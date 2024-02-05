@@ -329,6 +329,7 @@ class Solution:
 ### Leaders in an array
 ### Find sub-array with given sum
 
-# String
+## String
+
 > Strings are defined as an array of characters. The difference between a character array and a string is the string is 
 > terminated with a special character ‘\0’.
