@@ -34,9 +34,7 @@ structure.
 - *Omega Notation (Ω)* – Omega(Ω) notation specifically describes the best-case scenario.
 - *Theta Notation (θ)* – This notation represents the average complexity of an algorithm.
 
-
 ![text](src/o-graph.png)
-
 
 ## Data Structures
 
