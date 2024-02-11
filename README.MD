@@ -1,8 +1,6 @@
 # Data Structure and Algorithms
 
-
 [source](https://www.geeksforgeeks.org/learn-data-structures-and-algorithms-dsa-tutorial)
-
 
 ## Data Structures
 A data structure is defined as a particular way of storing and organizing data in our devices to use the data efficiently 
