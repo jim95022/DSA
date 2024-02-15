@@ -183,6 +183,7 @@ structure.
 - Prime numbers and Primality Tests
 - Sieve Algorithms, etc.
 
+
 ### Geometric Algorithms
 > These algorithms are designed to solve Geometric Problems. They requires in-depth knowledge of different mathematical 
 > concepts
