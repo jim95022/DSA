@@ -196,15 +196,12 @@ structure.
 - Quadilateral
 - Polygon & Convex Hull
 
-
 ### Bitwise Algorithms
 > The Bitwise Algorithms is used to perform operations at the bit-level or to manipulate bits in different ways. 
 > The bitwise operations are found to be much faster and are sometimes used to improve the efficiency of a program.
 
-
 ### Randomized Algorithms
 > An algorithm that uses random numbers to decide what to do next anywhere in its logic is called Randomized Algorithm.
-
 
 ### Branch and Bound Algorithm
 > Branch and bound is an algorithm design paradigm which is generally used for solving combinatorial optimization 
