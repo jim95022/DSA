@@ -12,7 +12,6 @@ Algorithm is defined as a process or set of well-defined instructions that are t
 of problems or perform a specific type of calculation. To explain in simpler terms, it is a set of operations performed 
 in a step-by-step manner to execute a task.
 
-
 ## How to learn DSA
 1. Learn about Time and Space complexities
 2. Learn the basics of individual Data Structures
